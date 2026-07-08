@@ -18,6 +18,7 @@ export const listFilesTool: Tool = {
     },
     required: ["path"],
   },
+  requiresApproval: false,
 
   async execute(args) {
     const checked = resolveInsideCwd(args);

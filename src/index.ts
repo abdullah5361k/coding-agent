@@ -1,11 +1,10 @@
-import { config } from "./config/config";
+import { Agent } from "./agent/agent";
+import { Renderer } from "./cli/renderer";
+import { startRepl } from "./cli/repl";
 import { GroqProvider } from "./llm/groq";
-import type { LLMProvider } from "./llm/provider";
+import { createToolRegistry } from "./tools";
 
-const provider: LLMProvider = new GroqProvider();
+const agent = new Agent(new GroqProvider(), createToolRegistry());
+const renderer = new Renderer();
 
-const response = await provider.chat([
-  { role: "user", content: "Say hello in one short sentence." },
-]);
-
-console.log(`[${config.model}] ${response.content}`);
+await startRepl(agent, renderer);

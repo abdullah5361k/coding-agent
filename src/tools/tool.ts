@@ -12,5 +12,7 @@ export interface Tool {
   name: string;
   description: string;
   parameters: ToolParameters;
+  /** Tools that change anything must be approved by the user before each run. */
+  requiresApproval: boolean;
   execute(args: Record<string, unknown>): Promise<ToolResult>;
 }
